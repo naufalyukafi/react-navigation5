@@ -32,16 +32,6 @@ if(!firebase.apps.length){
 const App = () => {
   return (
     <Router />
-    // <Login />
-    // <Reducers />
-    // <Login />
-  //  <NavigationContainer>
-  //    <Stack.Navigator initialRouteName="Home">
-  //      <Stack.Screen name="Home" component={HomeScreen} />
-  //      <Stack.Screen name="Details" component={DetailScreen} />
-  //      <Stack.Screen name="Profiles" component={ProfileScreen} />
-  //    </Stack.Navigator>
-  //  </NavigationContainer>
   );
 };
 

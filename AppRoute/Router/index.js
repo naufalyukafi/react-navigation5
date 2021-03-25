@@ -1,19 +1,14 @@
 import React, {useState, useEffect} from 'react'
-import { StyleSheet, Text, View } from 'react-native'
 import { createStackNavigator } from "@react-navigation/stack"
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { createDrawerNavigator } from '@react-navigation/drawer'
 import { NavigationContainer } from '@react-navigation/native'
 import auth from "@react-native-firebase/auth"
 
-import AboutScreen from '../Pages/AboutScreen'
-import AddScreen from '../Pages/AddScreen'
 import HomeScreen from '../Pages/Home'
 import LoginScreen from '../Pages/Login'
 import RegisterScreen from '../Pages/Register'
 import ProjectScreen from '../Pages/ProjectSreen'
 import Setting from '../Pages/Setting'
-import SkillsProject from '../Pages/SkillsProject'
 
 const Tab = createBottomTabNavigator()
 const Stack = createStackNavigator()

@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {StyleSheet, Text, View, Button, TextButton, TouchableOpacity, TextInput, Alert} from 'react-native'
+import {StyleSheet, Text, View, TouchableOpacity, TextInput, Alert} from 'react-native'
 import auth from "@react-native-firebase/auth"
 const Login = ({ navigation }) => {
     const [email, setEmail] = useState('');
