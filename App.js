@@ -8,94 +8,26 @@
 import 'react-native-gesture-handler';
 import React from 'react';
 import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
   StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-  Button
 } from 'react-native';
-
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import firebase from '@react-native-firebase/app'
 import Router from './AppRoute/Router'
 
-// const HomeScreen = ({ navigation }) =>  {
-//   return (
-//     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-//       <Text>Home Screen By Yukafi.Dev</Text>
-//       <Button 
-//         title="Ke Detail Kuy!"
-//         onPress={() => navigation.navigate('Details')}
-//       />
-//       <View style={{height: 10}} />
-//       <Button 
-//         color="red"
-//         title="Ke Profile Kuy"
-//         onPress={() => navigation.navigate('Profiles')}
-//       />
-//     </View>
-//   )
-// }
+// Firebase Config
+var firebaseConfig = {
+  apiKey: "AIzaSyC5Q0pr5Kc-j8hzN8KrOm0yWLEBZc2jD9Y",
+  authDomain: "molidu-60dbb.firebaseapp.com",
+  projectId: "molidu-60dbb",
+  storageBucket: "molidu-60dbb.appspot.com",
+  messagingSenderId: "619665502754",
+  appId: "1:619665502754:web:7d2a0602540aadee7fd07b",
+  measurementId: "G-0XDLHN93RR"
+};
+//dikasih kondisi biar tidak terjadi error firebase default
 
-// const DetailScreen = ({route, navigation}) => {
-//   return (
-//     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-//         <Text>Details Screen By Yukafi.Dev</Text>
-//         <Button 
-//           title="Go to Details... again"
-//           onPress={() => navigation.push('Details')}
-//         />
-//         <View style={{height: 10}} />
-//         <Button 
-//           title="Go to Home..."
-//           onPress={() => navigation.navigate('Home')}
-//         />
-//         <View style={{height: 10}} />
-//         <Button 
-//           title="Go Back..."
-//           onPress={() => navigation.goBack()}
-//         />
-//         <View style={{height: 10}} />
-//         <Button 
-//           title="Go Back to First Screen in stack"
-//           onPress={() => navigation.popToTop()}
-//         />
-//     </View>
-//   )
-// }
-
-// const ProfileScreen = ({route, navigation}) => {
-//   return(
-//     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-//       <Text>Profile Screen Bung</Text>
-//       <Button
-//         color="black"
-//         title="Go to Home"
-//         onPress={() => navigation.navigate('Home')}
-//       />
-//       <View style={{height: 10}} />
-//       <Button 
-//         color="green"
-//         title="Go back to first screen is stack"
-//         onPress={() => navigation.popToTop()}
-//       />
-//     </View>
-//   )
-// }
-
-// Stack berguna untuk routing aplikasi
-const Stack = createStackNavigator();
+if(!firebase.apps.length){
+  firebase.initializeApp(firebaseConfig)
+}
 
 const App = () => {
   return (

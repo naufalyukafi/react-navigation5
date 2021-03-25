@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "619665502754",
+    "project_id": "molidu-60dbb",
+    "storage_bucket": "molidu-60dbb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:619665502754:android:148c6cb3319a763c7fd07b",
+        "android_client_info": {
+          "package_name": "com.reactnavigation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "619665502754-eh9cepltslq2ois78ch6veg7a4jm13ec.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnNtbS4s80vZ0-0EnyZAZcwQE8AqUOHq4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "619665502754-eh9cepltslq2ois78ch6veg7a4jm13ec.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,25 +1,22 @@
 import React, {useState} from 'react'
 import {StyleSheet, Text, View, Button, TextButton, TouchableOpacity, TextInput, Alert} from 'react-native'
 import auth from "@react-native-firebase/auth"
-const Login = ({ navigation }) => {
+const Register = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     
-    const onLoginPress = () => {
+    const onRegisterPress = () => {
         if(email == '' || password == ''){
             Alert.alert('Error', 'Form tidak boleh kosong')
         } else {
-            auth().signInWithEmailAndPassword(email, password)
+            auth().createUserWithEmailAndPassword(email, password)
             .then((res) => {
                 setEmail('')
                 setPassword('')
-                // console.log('respond berhasil ', res)
-                Alert.alert('Login Berhasil')
-                navigation.navigate('MainApp')
+                Alert.alert('Success', 'Buat Akun Molidu Berhasil')
             })
             .catch((err) => {
-                // console.error("Error", err.message)
-                Alert.alert('Error', err.message)
+                Alert.alert('Kata Sandi Error', err.message)
             })
         }
        
@@ -40,18 +37,19 @@ const Login = ({ navigation }) => {
                     value={password}
                     onChangeText={(text) => setPassword(text)}
                 />
-                <TouchableOpacity style={styles.btnLogin} onPress={onLoginPress}>
-                    <Text style={styles.btnLoginText}>LOGIN</Text>
+                <TouchableOpacity style={styles.btnRegister} onPress={onRegisterPress}>
+                    <Text style={styles.btnRegisterText}>REGISTERS</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.btnRegister} onPress={() => navigation.navigate('RegisterScreen')}>
-                    <Text>Daftar Akun di sini!</Text>
+                <TouchableOpacity style={styles.btnLogin} onPress={() => navigation.navigate('LoginScreen')}>
+                    <Text>Login di sini!</Text>
                 </TouchableOpacity>
+            {/* <Button color="green" onPress={() => navigation.navigate('MainApp')} title="Menuju Halaman Home" /> */}
             </View>
         </View>
     )
 }
 
-export default Login
+export default Register
 
 const styles = StyleSheet.create({
     wrapper:{
@@ -64,7 +62,7 @@ const styles = StyleSheet.create({
         padding: 20,
         flexDirection: 'column'
     },
-    btnLoginText: {
+    btnRegisterText: {
         backgroundColor: "blue",
         padding: 15,
         color: '#fff',
@@ -73,7 +71,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         marginTop: 10,
     },
-    btnRegister: {
+    btnLogin: {
         marginTop: 10
     }
 })
