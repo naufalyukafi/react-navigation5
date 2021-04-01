@@ -13,16 +13,13 @@ const Login = ({ navigation }) => {
             .then((res) => {
                 setEmail('')
                 setPassword('')
-                // console.log('respond berhasil ', res)
                 Alert.alert('Login Berhasil')
                 navigation.navigate('MainApp')
             })
             .catch((err) => {
-                // console.error("Error", err.message)
                 Alert.alert('Error', err.message)
             })
         }
-       
     }
     return (
         <View style={styles.wrapper}>

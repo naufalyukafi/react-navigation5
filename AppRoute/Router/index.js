@@ -9,6 +9,7 @@ import LoginScreen from '../Pages/Login'
 import RegisterScreen from '../Pages/Register'
 import ProjectScreen from '../Pages/ProjectSreen'
 import Setting from '../Pages/Setting'
+import FormAbsenScreen from "../Pages/FormAbsenScreen"
 
 const Tab = createBottomTabNavigator()
 const Stack = createStackNavigator()
@@ -48,7 +49,8 @@ const MainApp = () => {
                 :
                     <Tab.Navigator initialRouteName="HomeScreen">
                         <Tab.Screen name="HomeScreen" options={{title: 'Home'}} component={HomeScreen} />
-                        <Tab.Screen name="ProjectScreen" component={ProjectScreen} />
+                        <Tab.Screen name="ProjectScreen" options={{title: 'Tugas'}} component={ProjectScreen} />
+                        <Tab.Screen name="FormAbsenScreen" options={{title: 'Absensi'}} component={FormAbsenScreen} />
                     </Tab.Navigator>
             }
         </>
