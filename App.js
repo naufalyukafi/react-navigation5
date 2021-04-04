@@ -13,7 +13,8 @@ import {
 import firebase from '@react-native-firebase/app'
 import Router from './AppRoute/Router'
 import * as eva from '@eva-design/eva';
-import { ApplicationProvider } from '@ui-kitten/components';
+import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
+import { EvaIconsPack } from '@ui-kitten/eva-icons';
 
 // Firebase Config
 var firebaseConfig = {
@@ -33,9 +34,12 @@ if(!firebase.apps.length){
 
 const App = () => {
   return (
-    <ApplicationProvider {...eva} theme={eva.light}>
-      <Router />
-    </ApplicationProvider>
+    <>
+      <IconRegistry icons={EvaIconsPack} />
+      <ApplicationProvider {...eva} theme={eva.light}>
+        <Router />
+      </ApplicationProvider>
+    </>
   );
 };
 

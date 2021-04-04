@@ -1,93 +1,74 @@
-import React from 'react'
-import {StyleSheet, View, TouchableOpacity, Alert, ScrollView} from 'react-native'
-import { Input,  IndexPath, Select, SelectItem, Button, Text } from '@ui-kitten/components';
-
-const data = ['Hadir','Izin', 'Alfa'];
-const kelas = ['1', '2', '3', '4', '5', '6']
+import React, {useState, useEffect} from 'react'
+import {StyleSheet, View, FlatList} from 'react-native'
+import { Input,  Button, Spinner } from '@ui-kitten/components';
+import firestore from '@react-native-firebase/firestore';
+import Todo from "../Components/Todo";
 
 const FormAbsenScreen = () => {
-    const [selectedIndex, setSelectedIndex] = React.useState(new IndexPath(0));
-    const [selectedIndex2, setSelectedIndex2] = React.useState(new IndexPath(0));
+    const [todo, setTodo] = useState('')
+    const [loading, setLoading] = useState(true)
+    const [todos, setTodos] = useState([])
 
-    const [inputName, setInputName] = React.useState('')
-    const [handleInput, setHandleInput] = React.useState({})
+    const ref = firestore().collection('todo')
 
-    const displayValue = data[selectedIndex.row];   
-    const displayValue2 = kelas[selectedIndex2.row];
-
-    const renderOption = (title, id) => (
-        <SelectItem key={id} title={title}/>
-    );
-
-    const onSubmit = () => {
-        setHandleInput({inputName, displayValue2, displayValue})
-        // Alert.alert(handleInput
+    async function addTodo() {
+        await ref.add({
+            title: todo,
+            complete: false
+        });
+        setTodo('');
     }
-    React.useEffect(() => {
-        onSubmit()
-    }, [inputName])
-    console.log(handleInput)
+    useEffect(() => {
+        return ref.onSnapshot((querySnapshot) => {
+            const list = []
+            querySnapshot.forEach(doc => {
+                const {title, complete} = doc.data();
+                list.push({
+                    id: doc.id,
+                    title,
+                    complete
+                })
+            })
+            setTodos(list)
+            if(loading) {
+                setLoading(false)
+            }
+        })
+    }, [])
+
+    if(loading) {
+        return (
+            <View  style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                <Spinner />
+            </View>
+        )
+    }
+
     return (
-        
-        <View style={styles.wrapper}>
+        <>
+            <View style={styles.wrapper}>
+                <FlatList
+                    style={{flex: 1}}
+                    data={todos}
+                    keyExtractor={(item) => item.id}
+                    renderItem={({item}) => <Todo {...item} />}
+                />
+            </View>
             <Input 
-                value={inputName}
-                onChangeText={(text) => setInputName(text)}
-                label="Name"
-                placeholder="Input your name"
+                value={todo}
+                onChangeText={setTodo}
+                placeholder="Input new todo"
                 style={styles.input}
             />
-            <Select
-                placeholder="Input kelas"
-                label="Kelas"
-                style={styles.select}
-                value={displayValue2}
-                selectedIndex={selectedIndex2}
-                onSelect={index => setSelectedIndex2(index)}>
-                {kelas.map(renderOption)}
-            </Select>
-            <Select
-                label="Absensi"
-                style={styles.select}
-                value={displayValue}
-                selectedIndex={selectedIndex}
-                onSelect={index => setSelectedIndex(index)}>
-                {data.map(renderOption)}
-            </Select>
-            <Button 
-                style={{marginLeft: 30, marginRight: 20, marginTop: 20}}
-                onPress={onSubmit}
-            >Submit</Button>
-        </View>     
+            <Button onPress={() => addTodo()}>Add Todo</Button>
+        </>     
     )
 }
 
 const styles = StyleSheet.create({
     wrapper:{
-        flex: 1,
-        justifyContent: 'center',
-        flexDirection: 'column'
-    },
-    input: {
-        backgroundColor: '#fff',
-        paddingLeft: 10,
-        marginLeft: 20,
-        marginRight: 20,
-        marginTop: 20
-    },
-    radioButton: {
-        marginTop: 20,
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginLeft: 40
-    },
-    select: {
-        paddingLeft: 10,
-        marginLeft: 20,
-        marginRight: 20,
-        marginTop: 20,
+        flex: 1
     }
-
 })
 
 export default FormAbsenScreen
